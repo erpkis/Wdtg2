@@ -23,6 +23,8 @@ public class Wdtg1 {
                     System.out.println(Zlozonosc.ZlozonoscMetoda2(3));
                     System.out.println();
                     System.out.println(MiniMax.graj(Funkcje.ilosc, 3, Funkcje.czyPokazac));
+                    MiniMax_VS_Random.graj(Funkcje.ilosc, 3, Funkcje.czyPokazac);   //testuje
+                    System.out.println();                                           //testuje
                     break;
                 case 4:
                     Funkcje.ilePartii();
@@ -32,6 +34,8 @@ public class Wdtg1 {
                     System.out.println(Zlozonosc.ZlozonoscMetoda2(4));
                     System.out.println();
                     System.out.println(MiniMax.graj(Funkcje.ilosc, 4, Funkcje.czyPokazac));
+                    System.out.println();                                           //testuje
+                    MiniMax_VS_Random.graj(Funkcje.ilosc, 3, Funkcje.czyPokazac);   //testuje
                     break;
                 case 0:
                     System.out.println();

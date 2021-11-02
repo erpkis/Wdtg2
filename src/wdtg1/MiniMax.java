@@ -38,7 +38,7 @@ public class MiniMax {
             do {
                 MiniMax.gracz = 2;
                 MiniMax.przeciwnik = 1;
-                wykonajNajlepszyRuch(tab, 0);
+                wykonajNajlepszyRuch(tab, 0, MiniMax.gracz);
                 ileRuchow++;
                 MiniMax.sumujWszystkieRuchy++;
                 ileMozliwosci--;
@@ -49,7 +49,7 @@ public class MiniMax {
                 }
                 MiniMax.gracz = 1;
                 MiniMax.przeciwnik = 2;
-                wykonajNajlepszyRuch(tab, 0);
+                wykonajNajlepszyRuch(tab, 0, MiniMax.gracz);
                 ileRuchow++;
                 MiniMax.sumujWszystkieRuchy++;
                 ileMozliwosci--;
@@ -60,7 +60,7 @@ public class MiniMax {
                 do {
                     MiniMax.gracz = 1;
                     MiniMax.przeciwnik = 2;
-                    wykonajNajlepszyRuch(tab, 1);
+                    wykonajNajlepszyRuch(tab, 1, MiniMax.gracz);
                     ileRuchow++;
                     MiniMax.sumujWszystkieRuchy++;
                     Funkcje.pokazPlansze(tab, Funkcje.czyPokazac);
@@ -69,7 +69,7 @@ public class MiniMax {
                     }
                     MiniMax.gracz = 2;
                     MiniMax.przeciwnik = 1;
-                    wykonajNajlepszyRuch(tab, 1);
+                    wykonajNajlepszyRuch(tab, 1, MiniMax.gracz);
                     ileRuchow++;
                     MiniMax.sumujWszystkieRuchy++;
                     Funkcje.pokazPlansze(tab, Funkcje.czyPokazac);
@@ -115,7 +115,7 @@ public class MiniMax {
                     }
                 }
             }
-            return best - glebokosc;                                            //sprawdzam
+            return best - glebokosc;
         } else {
             int best = 1000;
             for (int i = 0; i < 3; i++) {
@@ -127,7 +127,7 @@ public class MiniMax {
                     }
                 }
             }
-            return best + glebokosc;                                            //sprawdzam
+            return best + glebokosc;
         }
     }
 
@@ -151,25 +151,25 @@ public class MiniMax {
         if (czyMax) {
             int best = -1000;
             Funkcje.znajdzDostepneRuchy(tab, MiniMax.gracz);
-            wykonajNajlepszyRuch(tab, 1);
+            wykonajNajlepszyRuch(tab, 1, MiniMax.gracz);
             best = Math.max(best, minimax2(tab, glebokosc + 1, !czyMax));
             for (int x = 0; x < 3; x++) {                                       //kopiowanie tablicy
                 for (int y = 0; y < 3; y++) {
                     tab[x][y] = tab2[x][y];
                 }
             }
-            return best;
+            return best - glebokosc;
         } else {
             int best = 1000;
             Funkcje.znajdzDostepneRuchy(tab, MiniMax.przeciwnik);
-            wykonajNajlepszyRuch(tab, 1);
+            wykonajNajlepszyRuch(tab, 1, MiniMax.przeciwnik);
             best = Math.min(best, minimax2(tab, glebokosc + 1, !czyMax));
             for (int x = 0; x < 3; x++) {                                       //kopiowanie tablicy
                 for (int y = 0; y < 3; y++) {
                     tab[x][y] = tab2[x][y];
                 }
             }
-            return best;
+            return best + glebokosc;
         }
 
     }
@@ -210,7 +210,7 @@ public class MiniMax {
         return 0;
     }
 
-    static void wykonajNajlepszyRuch(int[][] tab, int faza) {
+    static void wykonajNajlepszyRuch(int[][] tab, int faza, int gracz) {
         int najWartosc = -1000;
         if (faza == 0) {
             najWartosc = -1000;
@@ -218,7 +218,7 @@ public class MiniMax {
             for (int n = 0; n < 3; n++) {
                 for (int i = 0; i < 3; i++) {
                     if (tab[n][i] == 0) {
-                        tab[n][i] = MiniMax.gracz;
+                        tab[n][i] = gracz;
                         int ruchWartosc = minimax(tab, 0, false);
                         tab[n][i] = 0;
                         if (ruchWartosc > najWartosc) {
@@ -229,7 +229,7 @@ public class MiniMax {
                     }
                 }
             }
-            tab[tabN][tabI] = MiniMax.gracz;
+            tab[tabN][tabI] = gracz;
         } else if (faza == 1) {
             najWartosc = -1000;
             int najlepszy = -1;
@@ -240,7 +240,7 @@ public class MiniMax {
                     tab2[x][y] = tab[x][y];
                 }
             }
-            Funkcje.znajdzDostepneRuchy(tab, MiniMax.gracz);
+            Funkcje.znajdzDostepneRuchy(tab, gracz);
             Funkcje.brakRuchow = true;
             for (int ruch = 0; ruch < 32; ruch++) {
                 if (Funkcje.ruchy[ruch] == true) {

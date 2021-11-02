@@ -123,31 +123,6 @@ public class Funkcje {
         return wynik;
     }
 
-    static void wykonajPrzesuniecie(int tab[][], int gracz, int wersjaGry) {
-        int ileMozliwosci = 0;
-        znajdzDostepneRuchy(tab, gracz);
-        Funkcje.brakRuchow = true;
-        for (int i = 0; i < 32; i++) {
-            if (Funkcje.ruchy[i] == true) {
-                Funkcje.brakRuchow = false;
-                ileMozliwosci++;
-            }
-        }
-        int ruch = 0;
-        do {
-            Random losujRuch = new Random();
-            ruch = losujRuch.nextInt(32);
-        } while (Funkcje.ruchy[ruch] == false && Funkcje.brakRuchow == false);
-        Zlozonosc.sumujWszystkieMozliwosci += ileMozliwosci;
-        if (Funkcje.brakRuchow == false) {
-            Funkcje.przesun(tab, ruch);
-        }
-        for (int x = 0; x < 32; x++) {                                          //reset
-            Funkcje.ruchy[x] = false;
-        }
-        Funkcje.brakRuchow = false;
-    }
-
     static void znajdzDostepneRuchy(int[][] tab, int gracz) {
         for (int x = 0; x < 32; x++) {
             Funkcje.ruchy[x] = false;

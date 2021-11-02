@@ -9,7 +9,6 @@ public class Zlozonosc {
     static double sumujWszystkieRuchy = 0;
 
     static double ZlozonoscMetoda1(int wersjaGry, boolean czyPokazac) {
-        //Funkcje.czyPokazac = czyPokazac;
         double wynik = Zlozonosc.graj(Funkcje.ilosc, wersjaGry);
         System.out.print("Zlozonosc gry (metoda1): ");
         return wynik;
@@ -65,13 +64,13 @@ public class Zlozonosc {
             } while (ileRuchow < wersjaGry * 2);
             if (Funkcje.czyWygrywa(tab, 1) == false && Funkcje.czyWygrywa(tab, 2) == false && Funkcje.brakRuchow == false) {
                 do {
-                    Funkcje.wykonajPrzesuniecie(tab, 1, wersjaGry);
+                    Zlozonosc.wykonajPrzesuniecie(tab, 1, wersjaGry);
                     Zlozonosc.sumujWszystkieRuchy++;
                     Funkcje.pokazPlansze(tab, Funkcje.czyPokazac);
                     if (Funkcje.czyWygrywa(tab, 1)) {
                         break;
                     }
-                    Funkcje.wykonajPrzesuniecie(tab, 2, wersjaGry);
+                    Zlozonosc.wykonajPrzesuniecie(tab, 2, wersjaGry);
                     Zlozonosc.sumujWszystkieRuchy++;
                     Funkcje.pokazPlansze(tab, Funkcje.czyPokazac);
                 } while (Funkcje.czyWygrywa(tab, 1) == false && Funkcje.czyWygrywa(tab, 2) == false && Funkcje.brakRuchow == false);
@@ -89,5 +88,30 @@ public class Zlozonosc {
         System.out.println("parametr d: " + parD);
         double wynik = pow(parB, parD);
         return wynik;
+    }
+
+    static void wykonajPrzesuniecie(int tab[][], int gracz, int wersjaGry) {
+        int ileMozliwosci = 0;
+        Funkcje.znajdzDostepneRuchy(tab, gracz);
+        Funkcje.brakRuchow = true;
+        for (int i = 0; i < 32; i++) {
+            if (Funkcje.ruchy[i] == true) {
+                Funkcje.brakRuchow = false;
+                ileMozliwosci++;
+            }
+        }
+        int ruch = 0;
+        do {
+            Random losujRuch = new Random();
+            ruch = losujRuch.nextInt(32);
+        } while (Funkcje.ruchy[ruch] == false && Funkcje.brakRuchow == false);
+        Zlozonosc.sumujWszystkieMozliwosci += ileMozliwosci;
+        if (Funkcje.brakRuchow == false) {
+            Funkcje.przesun(tab, ruch);
+        }
+        for (int x = 0; x < 32; x++) {                                          //reset
+            Funkcje.ruchy[x] = false;
+        }
+        Funkcje.brakRuchow = false;
     }
 }
