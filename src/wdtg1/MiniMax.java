@@ -86,6 +86,7 @@ public class MiniMax {
         MiniMax.przeciwnik = 2;
         parB /= Funkcje.ilosc;
         parD /= Funkcje.ilosc;
+        System.out.println("gra MiniMax:");
         System.out.println("parametr b: " + parB);
         System.out.println("parametr d: " + parD);
         double wynik = pow(parB, parD);

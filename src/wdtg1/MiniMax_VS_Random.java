@@ -14,16 +14,19 @@ public class MiniMax_VS_Random {
         int[][] tab = new int[3][3];
         Random r = new Random();
         int n, i;
-        for (int gra = 0; gra < ilosc; gra++) {                                 //resetowanie planszy
+        for (int gra = 0; gra < ilosc; gra++) {
             for (int x = 0; x < 3; x++) {
                 for (int y = 0; y < 3; y++) {
                     tab[x][y] = 0;
                 }
             }
+            if(Funkcje.czyPokazac){
             System.out.println();
             System.out.println("Gra 'MiniMax VS Random' nr " + (gra + 1) + ":");
             System.out.println("random - 1, minimax - 2");
-            System.out.println();
+            System.out.println();    
+            }
+
             int ileRuchow = 0;
             do {
                 ruchRandom(tab, 0);
@@ -57,7 +60,9 @@ public class MiniMax_VS_Random {
             }
         }
         double procentWygranychMiniMaxa = ileRazyWygralMiniMax / ilosc;
-        System.out.println((procentWygranychMiniMaxa*100) + "%");
+        System.out.println("gra Random vs MiniMax:");
+        System.out.println("MegaMax wygrywa z Random w: " + (procentWygranychMiniMaxa*100) + "%");
+        System.out.println("========================================================");
     }
 
     static void ruchRandom(int tab[][], int faza) {

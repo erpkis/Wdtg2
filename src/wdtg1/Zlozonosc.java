@@ -28,6 +28,7 @@ public class Zlozonosc {
         Random r = new Random();
         int n, i;
         int ileRuchow, ileMozliwosci;
+        System.out.println("========================================================");
         for (int gra = 0; gra < ilosc; gra++) {
             for (int x = 0; x < 3; x++) {                                       //resetowanie planszy
                 for (int y = 0; y < 3; y++) {
@@ -84,6 +85,7 @@ public class Zlozonosc {
         }
         parB /= Funkcje.ilosc;
         parD /= Funkcje.ilosc;
+        System.out.println("gra Random:");
         System.out.println("parametr b: " + parB);
         System.out.println("parametr d: " + parD);
         double wynik = pow(parB, parD);
