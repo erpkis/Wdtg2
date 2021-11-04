@@ -31,7 +31,7 @@ public class MiniMax {
             }
             int x = r.nextInt(3);
             int y = r.nextInt(3);
-            tab[1][1] = 1;
+            tab[x][y] = 1;
             ileRuchow++;
             MiniMax.sumujWszystkieRuchy++;
             Funkcje.pokazPlansze(tab, Funkcje.czyPokazac);
@@ -82,8 +82,8 @@ public class MiniMax {
             MiniMax.sumujWszystkieRuchy = 0;
             parD += sredniaD;
         }
-        MiniMax.gracz = 1;
-        MiniMax.przeciwnik = 2;
+        //MiniMax.gracz = 1;
+        //MiniMax.przeciwnik = 2;
         parB /= Funkcje.ilosc;
         parD /= Funkcje.ilosc;
         System.out.println("gra MiniMax:");
@@ -116,7 +116,7 @@ public class MiniMax {
                     }
                 }
             }
-            return best - glebokosc;                                            //sprawdzam
+            return best;                                            //sprawdzam
         } else {
             int best = 1000;
             for (int i = 0; i < 3; i++) {
@@ -128,7 +128,7 @@ public class MiniMax {
                     }
                 }
             }
-            return best + glebokosc;
+            return best;
         }
     }
 
@@ -159,7 +159,7 @@ public class MiniMax {
                     tab[x][y] = tab2[x][y];
                 }
             }
-            return best - glebokosc;
+            return best;
         } else {
             int best = 1000;
             Funkcje.znajdzDostepneRuchy(tab, MiniMax.przeciwnik);
@@ -170,7 +170,7 @@ public class MiniMax {
                     tab[x][y] = tab2[x][y];
                 }
             }
-            return best + glebokosc;
+            return best;
         }
 
     }
